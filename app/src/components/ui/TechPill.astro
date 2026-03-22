@@ -1,0 +1,87 @@
+---
+interface Props {
+  name: string;
+  variant?: 'experience' | 'project';
+}
+
+const { name, variant = 'experience' } = Astro.props;
+
+// Tech-specific color map [background, text]
+const techColors: Record<string, [string, string]> = {
+  // JavaScript / Node ecosystem
+  'Node.js':        ['rgba(74,222,128,0.12)',  '#4ade80'],
+  'Nest.js':        ['rgba(249,168,212,0.12)', '#f9a8d4'],
+  'JavaScript':     ['rgba(250,204,21,0.12)',  '#facc15'],
+
+  // TypeScript
+  'TypeScript':     ['rgba(96,165,250,0.12)',  '#60a5fa'],
+
+  // Frontend frameworks
+  'React':          ['rgba(97,218,251,0.15)',  '#61dafb'],
+  'Angular':        ['rgba(248,113,113,0.12)', '#f87171'],
+  'Astro':          ['rgba(232,121,249,0.12)', '#e879f9'],
+  'Tailwind CSS':   ['rgba(56,189,248,0.12)',  '#38bdf8'],
+
+  // State management
+  'NgRx':           ['rgba(192,132,252,0.12)', '#c084fc'],
+  'RxJS':           ['rgba(240,171,252,0.12)', '#f0abfc'],
+  'Redux':          ['rgba(192,132,252,0.12)', '#c084fc'],
+
+  // Go
+  'Go':             ['rgba(34,211,238,0.12)',  '#22d3ee'],
+
+  // Cloud & DevOps
+  'AWS':            ['rgba(251,146,60,0.12)',  '#fb923c'],
+  'Docker':         ['rgba(56,189,248,0.15)',  '#38bdf8'],
+  'Kubernetes':     ['rgba(129,140,248,0.12)', '#818cf8'],
+  'Terraform':      ['rgba(167,139,250,0.12)', '#a78bfa'],
+  'GitHub Actions': ['rgba(203,213,225,0.10)', '#cbd5e1'],
+
+  // Databases
+  'DynamoDB':       ['rgba(147,197,253,0.12)', '#93c5fd'],
+  'MongoDB':        ['rgba(134,239,172,0.12)', '#86efac'],
+  'Firebase':       ['rgba(251,191,36,0.12)',  '#fbbf24'],
+
+  // Testing
+  'Jasmine':        ['rgba(232,121,249,0.12)', '#e879f9'],
+
+  // Protocols
+  'WebSocket':      ['rgba(52,211,153,0.12)',  '#34d399'],
+};
+
+const [bgColor, textColor] = techColors[name] ?? ['rgba(148,163,184,0.12)', '#94a3b8'];
+---
+
+<span
+  class:list={['tech-pill', `tech-pill--${variant}`]}
+  style={`--pill-bg: ${bgColor}; --pill-color: ${textColor};`}
+>{name}</span>
+
+<style>
+  .tech-pill {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+    white-space: nowrap;
+    line-height: 1;
+  }
+
+  /* Experience variant: colored pill */
+  .tech-pill--experience {
+    padding: 4px 8px;
+    border-radius: 12px;
+    background-color: var(--pill-bg);
+    color: var(--pill-color);
+  }
+
+  /* Project variant: bordered tag */
+  .tech-pill--project {
+    padding: 5px 9px;
+    border-radius: 2px;
+    border: 1px solid var(--pill-color, rgba(142, 213, 255, 0.2));
+    color: var(--pill-color, var(--color-accent));
+    background-color: var(--pill-bg, transparent);
+  }
+</style>

@@ -1,0 +1,42 @@
+{
+  "volunteering": [
+    {
+      "role": "Organizador",
+      "organization": "Angular Bolivia",
+      "icon": "🅰️🇧🇴",
+      "period": "Dic 2024 – Presente",
+      "description": null
+    },
+    {
+      "role": "Speaker",
+      "organization": "Google Developers Group",
+      "icon": "👨🏻‍💻",
+      "period": "Feb 2015 – Presente",
+      "description": "Talleres, eventos y conferencias enfocados en Angular, Firebase y Android."
+    }
+  ],
+  "awards": [
+    {
+      "title": "1er Lugar — Startup Weekend Cochabamba 2018",
+      "displayTitle": "Startup Weekend — 1er Lugar",
+      "icon": "🏆",
+      "issuer": "Seed Seeds",
+      "date": "Nov 2018",
+      "description": "Collares para mascotas con QR + GPS para ayudar a duenos a encontrar mascotas perdidas. Disene la interfaz y di el pitch.",
+      "tech": ["Sketch", "Angular", "Firebase"]
+    },
+    {
+      "title": "1er Lugar — HackBo 2017",
+      "displayTitle": "HackBo 2017 — 1er Lugar",
+      "icon": "🏆",
+      "issuer": "Clubes de Ciencia Bolivia",
+      "date": "Jun 2017",
+      "description": "Solucion de seguridad con IA para situaciones peligrosas en la calle. Disene el prototipo y di el pitch.",
+      "tech": ["Unity", "Arduino", "Adobe XD"]
+    }
+  ],
+  "groups": [
+    "AWS User Group Cochabamba",
+    "IxDF Local Group Cochabamba"
+  ]
+}

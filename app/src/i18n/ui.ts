@@ -1,0 +1,83 @@
+export const languages = {
+  en: 'English',
+  es: 'Espanol',
+} as const;
+
+export type Lang = keyof typeof languages;
+export const defaultLang: Lang = 'en';
+export const showDefaultLang = false;
+
+export const ui = {
+  en: {
+    'nav.about': 'About',
+    'nav.experience': 'Experience',
+    'nav.projects': 'Projects',
+    'nav.community': 'Community',
+    'nav.contact': 'Contact',
+    'nav.blog': 'Blog',
+    'sidebar.resume': 'Download Resume',
+    'sidebar.theme.dark': 'Switch to light mode',
+    'sidebar.theme.light': 'Switch to dark mode',
+    'experience.present': 'Present',
+    'experience.viewResume': 'View Full Resume',
+    'projects.liveSite': 'Live Site',
+    'projects.github': 'GitHub',
+    'projects.viewAll': 'View all projects on GitHub',
+    'community.title': 'Community & Awards',
+    'recommendations.title': 'Recommendations',
+    'recommendations.viewAll': '9 recommendations on LinkedIn',
+    'contact.headline': "Let's talk.",
+    'contact.subtext':
+      "I'm always open to discussing new projects, interesting ideas, or opportunities to collaborate.",
+    'contact.copyEmail': 'Copy email address',
+    'contact.copied': 'Copied!',
+    'blog.title': 'Blog',
+    'blog.readMore': 'Read more',
+    'blog.backToBlog': 'Back to blog',
+    'blog.publishedOn': 'Published on',
+    'blog.readingTime': 'min read',
+    'blog.tags': 'Tags',
+    'blog.prevPost': 'Previous post',
+    'blog.nextPost': 'Next post',
+    'blog.noPosts': 'No posts yet. Check back soon.',
+    'meta.title': 'Rodrigo Torrico — Senior Fullstack Engineer',
+    'meta.description':
+      'Senior Fullstack Engineer building scalable systems — from real-time APIs to cloud infrastructure — for products used by millions.',
+  },
+  es: {
+    'nav.about': 'Sobre mi',
+    'nav.experience': 'Experiencia',
+    'nav.projects': 'Proyectos',
+    'nav.community': 'Comunidad',
+    'nav.contact': 'Contacto',
+    'nav.blog': 'Blog',
+    'sidebar.resume': 'Descargar CV',
+    'sidebar.theme.dark': 'Cambiar a modo claro',
+    'sidebar.theme.light': 'Cambiar a modo oscuro',
+    'experience.present': 'Presente',
+    'experience.viewResume': 'Ver CV completo',
+    'projects.liveSite': 'Ver sitio',
+    'projects.github': 'GitHub',
+    'projects.viewAll': 'Ver todos los proyectos en GitHub',
+    'community.title': 'Comunidad y Premios',
+    'recommendations.title': 'Recomendaciones',
+    'recommendations.viewAll': '9 recomendaciones en LinkedIn',
+    'contact.headline': 'Hablemos.',
+    'contact.subtext':
+      'Siempre estoy abierto a discutir nuevos proyectos, ideas interesantes u oportunidades de colaborar.',
+    'contact.copyEmail': 'Copiar email',
+    'contact.copied': 'Copiado!',
+    'blog.title': 'Blog',
+    'blog.readMore': 'Leer mas',
+    'blog.backToBlog': 'Volver al blog',
+    'blog.publishedOn': 'Publicado el',
+    'blog.readingTime': 'min de lectura',
+    'blog.tags': 'Etiquetas',
+    'blog.prevPost': 'Post anterior',
+    'blog.nextPost': 'Siguiente post',
+    'blog.noPosts': 'No hay posts aun. Vuelve pronto.',
+    'meta.title': 'Rodrigo Torrico — Ingeniero Fullstack Senior',
+    'meta.description':
+      'Ingeniero Fullstack Senior construyendo sistemas escalables — desde APIs en tiempo real hasta infraestructura cloud — para productos usados por millones.',
+  },
+} as const;

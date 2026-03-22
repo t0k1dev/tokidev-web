@@ -1,0 +1,151 @@
+---
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const data = await import(`../../data/${lang}/community.json`);
+
+interface Volunteering {
+  role: string;
+  organization: string;
+  icon?: string;
+  period: string;
+  description: string | null;
+}
+
+interface Award {
+  title: string;
+  displayTitle?: string;
+  icon?: string;
+  issuer: string;
+  date: string;
+  description: string;
+  tech: string[];
+}
+
+// Build a flat list of community items for the 2x2 grid
+const volunteeringItems = data.volunteering.map((v: Volunteering) => ({
+  initials: v.icon ?? v.organization.split(' ').slice(0, 2).map((w: string) => w[0]).join('').toUpperCase(),
+  isEmoji: !!v.icon,
+  title: v.organization,
+  description: v.description || `${v.role}. ${v.period}.`,
+}));
+
+const awardItems = data.awards.map((a: Award) => ({
+  initials: a.icon ?? a.title.split(/[\s—–]+/).filter((w: string) => /^[A-Z0-9]/i.test(w)).slice(0, 2).map((w: string) => w[0]).join('').toUpperCase(),
+  isEmoji: !!a.icon,
+  title: a.displayTitle ?? a.title.replace(/^.*?(?:Place|Lugar)\s*[—–-]\s*/i, '').split(' ').slice(0, 2).join(' '),
+  description: a.description,
+}));
+
+const items = [...volunteeringItems, ...awardItems];
+---
+
+<section id="community" aria-label="Community and awards" class="section">
+  <h2 class="section-label">{t('community.title')}</h2>
+
+  <div class="community-grid">
+    {items.map((item) => (
+      <div class="community-card">
+        <div class:list={['card-icon', item.isEmoji && 'card-icon--emoji']}>{item.initials}</div>
+        <h3 class="card-title">{item.title}</h3>
+        <p class="card-description">{item.description}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-accent);
+    margin: 0 0 48px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--color-accent), transparent);
+    opacity: 0.35;
+  }
+
+  @media (max-width: 1023px) {
+    .section-label {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      padding: 16px 0;
+      background-color: color-mix(in srgb, var(--color-bg) 80%, transparent);
+      backdrop-filter: blur(8px);
+      margin: 0 0 24px;
+    }
+  }
+
+  .community-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  @media (min-width: 640px) {
+    .community-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .community-card {
+    background-color: var(--color-surface-2);
+    border: 1px solid rgba(62, 72, 79, 0.05);
+    border-radius: 4px;
+    padding: 32px;
+    min-height: 202px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .card-icon {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-accent);
+    background-color: rgba(142, 213, 255, 0.1);
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+
+  .card-icon--emoji {
+    font-size: 18px;
+    background-color: transparent;
+    width: auto;
+    gap: 2px;
+  }
+
+  .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-text-heading);
+    margin: 0 0 8px;
+    line-height: 1.5;
+  }
+
+  .card-description {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+</style>

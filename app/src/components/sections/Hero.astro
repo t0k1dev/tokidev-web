@@ -1,0 +1,59 @@
+---
+import { getLangFromUrl } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const data = await import(`../../data/${lang}/about.json`);
+---
+
+<section id="about" aria-label="About" class="hero-section animate-fade-in-up">
+  <h1 class="hero-headline" set:html={data.headline} />
+  <div class="hero-paragraphs">
+    {data.paragraphs.map((p: string) => (
+      <p set:html={p} />
+    ))}
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .hero-headline {
+    font-size: 36px;
+    font-weight: 900 !important;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    color: var(--color-text) !important;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-headline {
+      font-size: 64px;
+      line-height: 1;
+    }
+  }
+
+  .hero-paragraphs {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .hero-paragraphs p {
+    font-size: 18px;
+    color: var(--color-text-muted);
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  .hero-paragraphs p :global(strong),
+  .hero-headline :global(strong) {
+    font-weight: 700;
+    color: var(--color-text-heading);
+  }
+</style>

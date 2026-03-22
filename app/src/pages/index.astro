@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Experience from '../components/sections/Experience.astro';
+import Projects from '../components/sections/Projects.astro';
+import Community from '../components/sections/Community.astro';
+import Recommendations from '../components/sections/Recommendations.astro';
+import Contact from '../components/sections/Contact.astro';
+import { useTranslations } from '../i18n/utils';
+
+const t = useTranslations('en');
+---
+
+<BaseLayout title={t('meta.title')} description={t('meta.description')}>
+  <Hero />
+  <Experience />
+  <Projects />
+  <Community />
+  <Recommendations />
+  <Contact />
+</BaseLayout>

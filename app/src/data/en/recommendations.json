@@ -1,0 +1,18 @@
+{
+  "featured": [
+    {
+      "quote": "Exceptional Software Engineer, a reliable teammate who meets deadlines and delivers high-quality results.",
+      "author": "Daniel Oropeza Soria",
+      "title": "Full-stack Software Engineer",
+      "date": "Oct 2023"
+    },
+    {
+      "quote": "Skilled developer with a leader mentality, strong communication skills, and vast experience in agile environments across many technologies.",
+      "author": "Pedro Moriel Enriquez",
+      "title": "Senior Software Engineer Technical Lead at Unosquare",
+      "date": "Jun 2023"
+    }
+  ],
+  "totalCount": 9,
+  "linkedinUrl": "https://linkedin.com/in/tokidev"
+}

@@ -1,0 +1,52 @@
+{
+  "roles": [
+    {
+      "title": "Ingeniero de Software Senior",
+      "company": "Unosquare",
+      "companyUrl": "https://www.unosquare.com",
+      "period": "Nov 2022",
+      "endDate": null,
+      "location": "Bolivia · Remoto",
+      "story": "Me uni para tomar responsabilidad de la infraestructura y arquitectura — y termine construyendo toda la base cloud para una plataforma en tiempo real desde cero.",
+      "bullets": [
+        "Disene e implemente un sistema de gestion de features en tiempo real usando Node y Go",
+        "Mejore la estabilidad y UX para mas de 6 millones de usuarios corrigiendo bugs de produccion en codigo Angular legacy",
+        "Construi la infraestructura AWS desde cero para soportar APIs en tiempo real con Terraform, Docker y Kubernetes",
+        "Reduje el tiempo de setup de proyectos de 4 semanas a 4 dias mediante automatizacion de infraestructura",
+        "Lidere un equipo de desarrollo: 1:1s, desarrollo de carrera, gestion de entregas y code reviews",
+        "Fui entrevistador tecnico JS/TS evaluando arquitectura y habilidades de resolucion de problemas"
+      ],
+      "tech": ["Node.js", "Go", "AWS", "Terraform", "Docker", "Kubernetes", "Angular", "React", "TypeScript", "DynamoDB", "WebSocket", "GitHub Actions"]
+    },
+    {
+      "title": "Ingeniero de Software",
+      "company": "NICE CXone",
+      "companyUrl": "https://www.nice.com",
+      "period": "Jul 2021",
+      "endDate": "Jun 2022",
+      "location": null,
+      "story": "Vine aqui para trabajar en algo de mayor escala — y aprendi lo que se necesita para entregar a nivel enterprise, liderando la calidad de codigo para un equipo que manejaba 600 millones de pruebas de salud al ano.",
+      "bullets": [
+        "Reconstrui el frontend con NgRx y TypeScript para una red que maneja 600M pruebas de salud anuales",
+        "Lidere las practicas de calidad de codigo y desarrollo en Angular para el equipo",
+        "Mejore la cobertura de tests del 30% al 80% agregando pruebas unitarias con Jasmine"
+      ],
+      "tech": ["Angular", "TypeScript", "NgRx", "RxJS", "AWS", "Docker", "Jasmine"]
+    },
+    {
+      "title": "Desarrollador de Software",
+      "company": "Stealth (Special Tours)",
+      "companyUrl": null,
+      "period": "Dic 2018",
+      "endDate": "Jul 2021",
+      "location": "Bolivia",
+      "story": "Aqui fue donde aprendi a construir desde cero — backends serverless, bibliotecas de componentes reutilizables y sistemas que tenian que funcionar sin importar cuantos usuarios aparecieran.",
+      "bullets": [
+        "Construi backends serverless escalables sobre infraestructura Firebase",
+        "Aumente la velocidad de procesamiento en un 35% con features de procesamiento de video e imagen usando Node y Nest.js",
+        "Cree componentes Angular reutilizables y una biblioteca compartida soportando mas de 400 circuitos de viaje"
+      ],
+      "tech": ["Angular", "Node.js", "Nest.js", "Firebase", "Docker", "MongoDB", "TypeScript"]
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+---
+import { getLangFromUrl } from '../i18n/utils';
+import { useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<button
+  id="copy-email"
+  type="button"
+  aria-label={t('contact.copyEmail')}
+  class="copy-email-btn"
+  data-email="rodrigo.torricodelcastillo@gmail.com"
+  data-label-copy={t('contact.copyEmail')}
+  data-label-copied={t('contact.copied')}
+>
+  <svg class="icon-clipboard" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+  </svg>
+  <svg class="icon-check hidden" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="20 6 9 17 4 12"></polyline>
+  </svg>
+  <span class="copy-label">{t('contact.copyEmail')}</span>
+</button>
+
+<style>
+  .copy-email-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-accent);
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: border-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  }
+
+  .copy-email-btn:hover {
+    border-color: var(--color-accent);
+  }
+
+  .hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  function initCopyEmail() {
+    const btn = document.getElementById('copy-email');
+    if (!btn) return;
+
+    btn.addEventListener('click', async () => {
+      const email = btn.dataset.email!;
+      const labelCopied = btn.dataset.labelCopied!;
+      const labelCopy = btn.dataset.labelCopy!;
+
+      try {
+        await navigator.clipboard.writeText(email);
+        const label = btn.querySelector('.copy-label')!;
+        const iconClipboard = btn.querySelector('.icon-clipboard')!;
+        const iconCheck = btn.querySelector('.icon-check')!;
+
+        label.textContent = labelCopied;
+        iconClipboard.classList.add('hidden');
+        iconCheck.classList.remove('hidden');
+
+        setTimeout(() => {
+          label.textContent = labelCopy;
+          iconClipboard.classList.remove('hidden');
+          iconCheck.classList.add('hidden');
+        }, 2000);
+      } catch {
+        // Fallback: select text in a temporary input
+        const input = document.createElement('input');
+        input.value = email;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        document.body.removeChild(input);
+      }
+    });
+  }
+
+  initCopyEmail();
+  document.addEventListener('astro:after-swap', initCopyEmail);
+</script>

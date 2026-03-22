@@ -1,0 +1,12 @@
+{
+  "projects": [
+    {
+      "title": "solveOS",
+      "description": "A problem-solving framework for humans and AI agents. Provides a repeatable Plan, Build, Ship cycle with validation gates, where AI executes and the human decides.",
+      "url": "https://solveos-app.netlify.app/",
+      "github": "https://github.com/t0k1dev/solveOS",
+      "tech": [],
+      "image": null
+    }
+  ]
+}

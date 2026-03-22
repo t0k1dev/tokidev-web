@@ -1,0 +1,123 @@
+---
+interface Props {
+  quote: string;
+  author: string;
+  title: string;
+  date: string;
+  avatar?: string;
+}
+
+const { quote, author, title, avatar } = Astro.props;
+const initials = author.split(' ').slice(0, 2).map((w) => w[0]).join('').toUpperCase();
+---
+
+<article class="recommendation-card">
+  <span class="quote-mark" aria-hidden="true">"</span>
+
+  <blockquote class="quote-text">
+    {quote}
+  </blockquote>
+
+  <div class="attribution">
+    <div class:list={['author-avatar', !avatar && 'author-avatar--emoji']}>
+      {avatar
+        ? <img src={avatar} alt={author} class="avatar-img" />
+        : '👨🏻‍💻'
+      }
+    </div>
+    <div class="author-info">
+      <span class="author-name">{author}</span>
+      <span class="author-title">{title}</span>
+    </div>
+  </div>
+</article>
+
+<style>
+  .recommendation-card {
+    position: relative;
+    background-color: var(--color-surface);
+    border: 1px solid rgba(62, 72, 79, 0.1);
+    border-radius: 8px;
+    padding: 49px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .quote-mark {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    font-size: 96px;
+    font-family: Georgia, 'Times New Roman', serif;
+    color: rgba(142, 213, 255, 0.1);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .quote-text {
+    font-size: 18px;
+    font-style: normal;
+    color: var(--color-text-heading);
+    line-height: 1.625;
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  .attribution {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background-color: #31394d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .author-avatar--emoji {
+    font-size: 20px;
+    background-color: transparent;
+  }
+
+  .avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .author-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-text-heading);
+    line-height: 1.4;
+  }
+
+  .author-title {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+</style>

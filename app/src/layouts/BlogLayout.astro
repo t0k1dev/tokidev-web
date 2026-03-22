@@ -1,0 +1,141 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import SkipToContent from '../components/SkipToContent.astro';
+import Header from '../components/Header.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+}
+
+const { title, description, image } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <BaseHead title={title} description={description} image={image} />
+  </head>
+  <body>
+    <SkipToContent />
+    <Header />
+
+    <main id="content" class="blog-content">
+      <a href={translatePath('/blog/')} class="back-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        {t('blog.backToBlog')}
+      </a>
+
+      <slot />
+    </main>
+
+    <style>
+      .blog-content {
+        max-width: 768px;
+        margin: 0 auto;
+        padding: 40px 24px 80px;
+      }
+
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--color-accent);
+        text-decoration: none;
+        margin-bottom: 32px;
+        transition: opacity 0.2s ease-in-out;
+      }
+
+      .back-link:hover {
+        opacity: 0.8;
+      }
+
+      /* Prose styles for blog post body */
+      :global(.blog-content article) {
+        font-size: 16px;
+        line-height: 1.7;
+        color: var(--color-text);
+      }
+
+      :global(.blog-content article h2) {
+        font-size: 24px;
+        font-weight: 700;
+        margin-top: 48px;
+        margin-bottom: 16px;
+        color: var(--color-text);
+      }
+
+      :global(.blog-content article h3) {
+        font-size: 20px;
+        font-weight: 600;
+        margin-top: 32px;
+        margin-bottom: 12px;
+        color: var(--color-text);
+      }
+
+      :global(.blog-content article p) {
+        margin-bottom: 16px;
+      }
+
+      :global(.blog-content article a) {
+        color: var(--color-accent);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+
+      :global(.blog-content article code) {
+        font-family: var(--font-mono);
+        font-size: 14px;
+        background-color: var(--color-surface);
+        padding: 2px 6px;
+        border-radius: 4px;
+      }
+
+      :global(.blog-content article pre) {
+        background-color: var(--color-surface);
+        padding: 24px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin-bottom: 24px;
+      }
+
+      :global(.blog-content article pre code) {
+        background: none;
+        padding: 0;
+      }
+
+      :global(.blog-content article blockquote) {
+        border-left: 3px solid var(--color-accent);
+        padding-left: 16px;
+        margin-left: 0;
+        color: var(--color-text-muted);
+        font-style: italic;
+      }
+
+      :global(.blog-content article ul),
+      :global(.blog-content article ol) {
+        padding-left: 24px;
+        margin-bottom: 16px;
+      }
+
+      :global(.blog-content article li) {
+        margin-bottom: 8px;
+      }
+
+      :global(.blog-content article img) {
+        max-width: 100%;
+        border-radius: 8px;
+      }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,146 @@
+---
+import TechPill from './TechPill.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+interface Props {
+  title: string;
+  company: string;
+  companyUrl: string | null;
+  period: string;
+  endDate: string | null;
+  story: string;
+  bullets: string[];
+  tech: string[];
+}
+
+const { title, company, companyUrl, period, endDate, story, bullets, tech } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<article class="experience-card">
+  <div class="experience-date">
+    <span>{period} — {endDate ?? t('experience.present')}</span>
+  </div>
+
+  <div class="experience-content">
+    <h3 class="experience-title">
+      {title} ·{' '}
+      {companyUrl ? (
+        <a href={companyUrl} target="_blank" rel="noopener noreferrer" class="company-link">
+          {company}
+        </a>
+      ) : (
+        <span class="company-name">{company}</span>
+      )}
+    </h3>
+
+    <p class="experience-story">{story}</p>
+
+    <ul class="experience-bullets">
+      {bullets.map((bullet) => (
+        <li>
+          <span class="bullet-arrow" aria-hidden="true">▹</span>
+          <span>{bullet}</span>
+        </li>
+      ))}
+    </ul>
+
+    <div class="experience-tech">
+      {tech.map((name) => (
+        <TechPill name={name} variant="experience" />
+      ))}
+    </div>
+  </div>
+</article>
+
+<style>
+  .experience-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  @media (min-width: 640px) {
+    .experience-card {
+      grid-template-columns: 120px 1fr;
+      gap: 32px;
+    }
+  }
+
+  .experience-date {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: var(--color-text-faint);
+    padding-top: 4px;
+    white-space: nowrap;
+  }
+
+  .experience-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .experience-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-text-heading);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .company-link {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+  }
+
+  .company-link:hover {
+    color: var(--color-accent);
+  }
+
+  .company-name {
+    color: inherit;
+  }
+
+  .experience-story {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .experience-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 11.5px;
+  }
+
+  .experience-bullets li {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    font-size: 14px;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .bullet-arrow {
+    color: var(--color-accent);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .experience-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 8px;
+  }
+</style>
