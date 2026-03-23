@@ -5,6 +5,8 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 
+const homePath = translatePath('/');
+
 const navItems = [
   { id: 'about', label: t('nav.about') },
   { id: 'experience', label: t('nav.experience') },
@@ -18,7 +20,7 @@ const navItems = [
   <ul class="nav-list">
     {navItems.map((item) => (
       <li>
-        <a href={`#${item.id}`} class="nav-link" data-section={item.id}>
+        <a href={`${homePath}#${item.id}`} class="nav-link" data-section={item.id}>
           <span class="nav-indicator" aria-hidden="true"></span>
           <span class="nav-label">{item.label}</span>
         </a>

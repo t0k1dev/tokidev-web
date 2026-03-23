@@ -25,7 +25,7 @@ const posts = (await getCollection('blog'))
           description={post.data.description}
           date={post.data.date.toISOString()}
           tags={post.data.tags}
-          slug={translatePath(`/blog/${post.id}/`)}
+          slug={translatePath(`/blog/${post.id.replace(/^es\//, '')}/`)}
         />
       ))}
     </div>
