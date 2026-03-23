@@ -54,7 +54,9 @@ const [bgColor, textColor] = techColors[name] ?? ['rgba(148,163,184,0.12)', '#94
 
 <span
   class:list={['tech-pill', `tech-pill--${variant}`]}
-  style={`--pill-bg: ${bgColor}; --pill-color: ${textColor};`}
+  style={variant === 'experience'
+    ? `background-color: ${bgColor}; color: ${textColor};`
+    : `background-color: ${bgColor}; color: ${textColor}; border-color: ${textColor};`}
 >{name}</span>
 
 <style>
@@ -72,16 +74,12 @@ const [bgColor, textColor] = techColors[name] ?? ['rgba(148,163,184,0.12)', '#94
   .tech-pill--experience {
     padding: 4px 8px;
     border-radius: 12px;
-    background-color: var(--pill-bg);
-    color: var(--pill-color);
   }
 
   /* Project variant: bordered tag */
   .tech-pill--project {
     padding: 5px 9px;
     border-radius: 2px;
-    border: 1px solid var(--pill-color, rgba(142, 213, 255, 0.2));
-    color: var(--pill-color, var(--color-accent));
-    background-color: var(--pill-bg, transparent);
+    border: 1px solid;
   }
 </style>

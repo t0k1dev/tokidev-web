@@ -6,7 +6,35 @@
 [build.environment]
   NODE_VERSION = "22"
 
+# ===== Cache Headers =====
+
+# Hashed assets (JS/CSS) — immutable, 1 year
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Fonts — 1 year (filenames are stable)
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# HTML pages — always revalidate
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# PDF (resume) — 1 day
+[[headers]]
+  for = "/*.pdf"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# ===== Redirects =====
+
 [[redirects]]
   from   = "/*"
-  to     = "/index.html"
+  to     = "/404.html"
   status = 404

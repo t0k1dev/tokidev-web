@@ -5,7 +5,7 @@ const lang = getLangFromUrl(Astro.url);
 const data = await import(`../../data/${lang}/about.json`);
 ---
 
-<section id="about" aria-label="About" class="hero-section animate-fade-in-up" data-animate>
+<section id="about" aria-label="About" class="hero-section" data-reveal>
   <h1 class="hero-headline" set:html={data.headline} />
   <div class="hero-paragraphs">
     {data.paragraphs.map((p: string) => (

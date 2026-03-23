@@ -51,6 +51,13 @@ html {
   color-scheme: dark;
 }
 
+/* P10: Respect reduced-motion preference for scroll */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 html.light {
   color-scheme: light;
 }
@@ -62,6 +69,10 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* P4: Only apply theme transitions after page has loaded (avoids flash on initial paint) */
+html:not(.no-transition) body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 

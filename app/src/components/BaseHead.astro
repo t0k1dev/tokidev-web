@@ -40,17 +40,24 @@ const canonical = canonicalUrl ?? Astro.url.href;
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={new URL(image, Astro.site)} />
 
-<!-- DNS prefetch for external domains -->
-<link rel="dns-prefetch" href="https://github.com" />
-<link rel="dns-prefetch" href="https://linkedin.com" />
+<!-- Preconnect to external domains (faster than dns-prefetch) -->
+<link rel="preconnect" href="https://github.com" crossorigin />
+<link rel="preconnect" href="https://linkedin.com" crossorigin />
 
-<!-- Theme script (inline to prevent FOUC) -->
+<!-- Theme script (inline to prevent FOUC). Adds no-transition to avoid flash on initial paint (P4) -->
 <script is:inline>
   (function () {
-    const stored = localStorage.getItem('theme');
+    var html = document.documentElement;
+    html.classList.add('no-transition');
+    var stored = localStorage.getItem('theme');
     if (stored === 'light' || (!stored && window.matchMedia('(prefers-color-scheme: light)').matches)) {
-      document.documentElement.classList.add('light');
+      html.classList.add('light');
     }
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        html.classList.remove('no-transition');
+      });
+    });
   })();
 </script>
 

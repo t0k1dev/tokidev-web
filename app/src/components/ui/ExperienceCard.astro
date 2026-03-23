@@ -18,7 +18,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<article class="experience-card" data-animate>
+<article class="experience-card" data-reveal>
   <div class="experience-date">
     <span>{period} — {endDate ?? t('experience.present')}</span>
   </div>

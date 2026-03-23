@@ -1,5 +1,6 @@
 ---
 import CopyEmail from '../CopyEmail.astro';
+import SectionLabel from '../ui/SectionLabel.astro';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
@@ -7,8 +8,8 @@ const t = useTranslations(lang);
 const data = await import(`../../data/${lang}/contact.json`);
 ---
 
-<footer id="contact" aria-label="Contact" class="section" data-animate>
-  <h2 class="section-label">{t('nav.contact')}</h2>
+<footer id="contact" aria-label="Contact" class="section" data-reveal>
+  <SectionLabel>{t('nav.contact')}</SectionLabel>
 
   <div class="contact-content">
     <h3 class="contact-headline">{t('contact.headline')}</h3>
@@ -34,39 +35,6 @@ const data = await import(`../../data/${lang}/contact.json`);
 </footer>
 
 <style>
-  .section-label {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--color-accent);
-    margin: 0 0 48px;
-  }
-
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(to right, var(--color-accent), transparent);
-    opacity: 0.35;
-  }
-
-  @media (max-width: 1023px) {
-    .section-label {
-      position: sticky;
-      top: 0;
-      z-index: 5;
-      padding: 16px 0;
-      background-color: color-mix(in srgb, var(--color-bg) 80%, transparent);
-      backdrop-filter: blur(8px);
-      margin: 0 0 24px;
-    }
-  }
-
   .contact-content {
     display: flex;
     flex-direction: column;

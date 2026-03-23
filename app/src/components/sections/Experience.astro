@@ -1,5 +1,6 @@
 ---
 import ExperienceCard from '../ui/ExperienceCard.astro';
+import SectionLabel from '../ui/SectionLabel.astro';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
@@ -18,8 +19,8 @@ interface Role {
 }
 ---
 
-<section id="experience" aria-label="Work experience" class="section" data-animate>
-  <h2 class="section-label">{t('nav.experience')}</h2>
+<section id="experience" aria-label="Work experience" class="section" data-reveal>
+  <SectionLabel>{t('nav.experience')}</SectionLabel>
 
   <div class="experience-list">
     {data.roles.map((role: Role) => (
@@ -38,40 +39,6 @@ interface Role {
 </section>
 
 <style>
-  .section-label {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--color-accent);
-    margin: 0 0 48px;
-  }
-
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(to right, var(--color-accent), transparent);
-    opacity: 0.35;
-  }
-
-  /* Mobile: show as sticky header */
-  @media (max-width: 1023px) {
-    .section-label {
-      position: sticky;
-      top: 0;
-      z-index: 5;
-      padding: 16px 0;
-      background-color: color-mix(in srgb, var(--color-bg) 80%, transparent);
-      backdrop-filter: blur(8px);
-      margin: 0 0 24px;
-    }
-  }
-
   .experience-list {
     display: flex;
     flex-direction: column;

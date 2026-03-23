@@ -1,4 +1,5 @@
 ---
+import SectionLabel from '../ui/SectionLabel.astro';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
@@ -41,8 +42,8 @@ const awardItems = data.awards.map((a: Award) => ({
 const items = [...volunteeringItems, ...awardItems];
 ---
 
-<section id="community" aria-label="Community and awards" class="section" data-animate>
-  <h2 class="section-label">{t('community.title')}</h2>
+<section id="community" aria-label="Community and awards" class="section" data-reveal>
+  <SectionLabel>{t('community.title')}</SectionLabel>
 
   <div class="community-grid">
     {items.map((item) => (
@@ -56,39 +57,6 @@ const items = [...volunteeringItems, ...awardItems];
 </section>
 
 <style>
-  .section-label {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--color-accent);
-    margin: 0 0 48px;
-  }
-
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(to right, var(--color-accent), transparent);
-    opacity: 0.35;
-  }
-
-  @media (max-width: 1023px) {
-    .section-label {
-      position: sticky;
-      top: 0;
-      z-index: 5;
-      padding: 16px 0;
-      background-color: color-mix(in srgb, var(--color-bg) 80%, transparent);
-      backdrop-filter: blur(8px);
-      margin: 0 0 24px;
-    }
-  }
-
   .community-grid {
     display: grid;
     grid-template-columns: 1fr;

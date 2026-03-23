@@ -1,0 +1,42 @@
+---
+// Shared section label component — single source of truth for .section-label styles (P9)
+---
+
+<h2 class="section-label"><slot /></h2>
+
+<style>
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-accent);
+    margin: 0 0 48px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--color-accent), transparent);
+    opacity: 0.35;
+  }
+
+  /* Mobile: sticky header with optimised compositing (P5) */
+  @media (max-width: 1023px) {
+    .section-label {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      padding: 16px 0;
+      background-color: color-mix(in srgb, var(--color-bg) 80%, transparent);
+      backdrop-filter: blur(8px);
+      margin: 0 0 24px;
+      will-change: transform;
+    }
+  }
+</style>
