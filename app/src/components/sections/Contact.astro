@@ -7,7 +7,7 @@ const t = useTranslations(lang);
 const data = await import(`../../data/${lang}/contact.json`);
 ---
 
-<footer id="contact" aria-label="Contact" class="section">
+<footer id="contact" aria-label="Contact" class="section" data-animate>
   <h2 class="section-label">{t('nav.contact')}</h2>
 
   <div class="contact-content">
@@ -110,11 +110,13 @@ const data = await import(`../../data/${lang}/contact.json`);
     text-decoration-color: rgba(142, 213, 255, 0.3);
     text-underline-offset: 4px;
     transition: text-decoration-color 0.2s ease-in-out;
+    word-break: break-all;
   }
 
   @media (min-width: 1024px) {
     .email-link {
       font-size: 36px;
+      word-break: normal;
     }
   }
 
