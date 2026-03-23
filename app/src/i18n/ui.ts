@@ -15,6 +15,7 @@ export const ui = {
     'nav.community': 'Community',
     'nav.contact': 'Contact',
     'nav.blog': 'Blog',
+    'nav.writing': 'Writing',
     'sidebar.resume': 'Download Resume',
     'sidebar.theme.dark': 'Switch to light mode',
     'sidebar.theme.light': 'Switch to dark mode',
@@ -40,6 +41,7 @@ export const ui = {
     'blog.prevPost': 'Previous post',
     'blog.nextPost': 'Next post',
     'blog.noPosts': 'No posts yet. Check back soon.',
+    'blog.viewAll': 'View all posts',
     'meta.title': 'Rodrigo Torrico — Senior Fullstack Engineer',
     'meta.description':
       'Senior Fullstack Engineer building scalable systems — from real-time APIs to cloud infrastructure — for products used by millions.',
@@ -51,6 +53,7 @@ export const ui = {
     'nav.community': 'Comunidad',
     'nav.contact': 'Contacto',
     'nav.blog': 'Blog',
+    'nav.writing': 'Artículos',
     'sidebar.resume': 'Descargar CV',
     'sidebar.theme.dark': 'Cambiar a modo claro',
     'sidebar.theme.light': 'Cambiar a modo oscuro',
@@ -76,6 +79,7 @@ export const ui = {
     'blog.prevPost': 'Post anterior',
     'blog.nextPost': 'Siguiente post',
     'blog.noPosts': 'No hay posts aun. Vuelve pronto.',
+    'blog.viewAll': 'Ver todos los artículos',
     'meta.title': 'Rodrigo Torrico — Ingeniero Fullstack Senior',
     'meta.description':
       'Ingeniero Fullstack Senior construyendo sistemas escalables — desde APIs en tiempo real hasta infraestructura cloud — para productos usados por millones.',

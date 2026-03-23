@@ -1,0 +1,168 @@
+---
+import SectionLabel from '../ui/SectionLabel.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
+import { getCollection } from 'astro:content';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const posts = (await getCollection('blog'))
+  .filter((post) => post.data.lang === lang && !post.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString(lang === 'es' ? 'es-ES' : 'en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+---
+
+<section id="writing" aria-label="Latest posts" class="section" data-reveal>
+  <SectionLabel>{t('nav.writing')}</SectionLabel>
+
+  <div class="posts-list">
+    {posts.map((post) => {
+      const slug = translatePath(`/blog/${post.id.replace(/^(?:en|es)\//, '')}/`);
+      return (
+        <a href={slug} class="post-item">
+          <div class="post-meta">
+            <time datetime={post.data.date.toISOString()}>
+              {formatDate(post.data.date)}
+            </time>
+            <div class="post-tags">
+              {post.data.tags.slice(0, 3).map((tag: string) => (
+                <span class="tag-pill">{tag}</span>
+              ))}
+            </div>
+          </div>
+          <h3 class="post-title">{post.data.title}</h3>
+          <p class="post-description">{post.data.description}</p>
+          <span class="read-more">{t('blog.readMore')} →</span>
+        </a>
+      );
+    })}
+  </div>
+
+  <a href={translatePath('/blog/')} class="view-all">
+    {t('blog.viewAll')} →
+  </a>
+</section>
+
+<style>
+  .posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .post-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--color-border);
+    text-decoration: none;
+    transition: padding-left 0.2s ease;
+  }
+
+  .post-item:first-child {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .post-item:hover {
+    padding-left: 8px;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  time {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag-pill {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    background-color: var(--color-surface-2);
+    color: var(--color-accent);
+    border: 1px solid var(--color-border);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .post-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-text-heading);
+    margin: 0;
+    line-height: 1.3;
+    transition: color 0.2s ease;
+  }
+
+  .post-item:hover .post-title {
+    color: var(--color-accent);
+  }
+
+  .post-description {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .read-more {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .post-item:hover .read-more {
+    opacity: 1;
+  }
+
+  .view-all {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 32px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: letter-spacing 0.2s ease;
+  }
+
+  .view-all:hover {
+    letter-spacing: 0.18em;
+  }
+</style>
